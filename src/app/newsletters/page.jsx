@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import {
   Select,
@@ -18,17 +18,17 @@ import { format, addDays, parse } from "date-fns";
 import { motion } from "framer-motion";
 import { getNewsletterPageData } from "@/functions/getNewsLatterPageData";
 import Loading from "@/components/Loading";
+import { changeAutoEmailSentTime } from "@/functions/changeAutoEmailSentTime";
 
 export default function Newsletters() {
-  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedTime, setSelectedTime] = useState("1:00 PM");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [data, setData] = useState({
     DailyEmailTemplet: [],
     serverCurrentTime: "4:53 PM",
-    emailSentTime:"",
+    emailSentTime: "",
   });
-
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -56,13 +56,16 @@ export default function Newsletters() {
     }
   }
 
-
+  const handleOnChangeTime = async (e) => {
+    setSelectedTime(e);
+    changeAutoEmailSentTime(e, setLoading, setError);
+  };
   useEffect(() => {
     getNewsletterPageData(setData, setLoading, setError);
   }, []);
 
   if (loading) {
-    return <Loading/>
+    return <Loading />;
   }
 
   return (
@@ -86,7 +89,10 @@ export default function Newsletters() {
             ({data.serverCurrentTime}) and auto email sent time (
             {data.emailSentTime})
           </h2>
-          <Select onValueChange={setSelectedTime} value={selectedTime}>
+          <Select
+            onValueChange={(e) => handleOnChangeTime(e)}
+            value={selectedTime}
+          >
             <SelectTrigger className="w-[180px] shadow-md hover:shadow-lg transition-shadow duration-300">
               <SelectValue placeholder="Select time" />
             </SelectTrigger>
