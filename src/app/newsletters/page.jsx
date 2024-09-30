@@ -225,7 +225,7 @@ export default function Newsletters() {
                 <p className="text-xl font-bold">{data.emailSentTime}</p>
               </div>
             </div>
-            <div>
+            {/* <div>
               <label className="text-sm font-medium mb-2 block">
                 Select Time Zone
               </label>
@@ -244,7 +244,7 @@ export default function Newsletters() {
                   ))}
                 </SelectContent>
               </Select>
-            </div>
+            </div> */}
             <div>
               <label className="text-sm font-medium mb-2 block">
                 Select New Time for Daily Newsletters (Central Time)
