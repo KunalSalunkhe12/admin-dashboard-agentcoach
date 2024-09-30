@@ -8,6 +8,7 @@ import {
   BarChartIcon,
   LogOutIcon,
   LayoutIcon,
+  CircleHelp,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -25,6 +26,7 @@ export function Sidebar() {
     { icon: NewspaperIcon, label: "Blogs", path: "/blogs" },
     { icon: MailIcon, label: "Newsletters", path: "/newsletters" },
     { icon: BarChartIcon, label: "Analytics", path: "/analytics" },
+    { icon: CircleHelp , label: "FAQS", path: "/faq" },
   ];
 
   return (
