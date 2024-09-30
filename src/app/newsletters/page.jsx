@@ -214,7 +214,7 @@ export default function Newsletters() {
             <div className="flex items-center space-x-4">
               <Clock className="h-6 w-6" />
               <div>
-                <p className="text-sm font-medium">Current Server Time (CT)</p>
+                <p className="text-sm font-medium">Current Time (CT)</p>
                 <p className="text-xl font-bold">{data.serverCurrentTime}</p>
               </div>
             </div>
