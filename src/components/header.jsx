@@ -9,9 +9,9 @@ export function Header() {
         <div className="flex items-center justify-between">
           <div className="flex-1"></div>
           <div className="flex items-center space-x-4">
-            <button className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors duration-200">
+            {/* <button className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors duration-200">
               <BellIcon className="h-5 w-5" />
-            </button>
+            </button> */}
             <div className="flex items-center space-x-2">
               <Image
                 width={100}

@@ -26,7 +26,7 @@ export function Sidebar() {
     { icon: NewspaperIcon, label: "Blogs", path: "/blogs" },
     { icon: MailIcon, label: "Newsletters", path: "/newsletters" },
     { icon: BarChartIcon, label: "Analytics", path: "/analytics" },
-    { icon: CircleHelp , label: "FAQS", path: "/faq" },
+    { icon: CircleHelp , label: "FAQs", path: "/faq" },
   ];
 
   return (

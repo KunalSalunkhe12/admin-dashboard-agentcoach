@@ -1,6 +1,6 @@
 import React from "react";
 
-export function StatCard({ icon, title, value, trend, trendValue, className }) {
+export function StatCard({ icon, title, value, trend, className }) {
   const trendColor = trend === "up" ? "text-green-500" : "text-red-500";
   const trendIcon = trend === "up" ? "↑" : "↓";
 
@@ -12,10 +12,10 @@ export function StatCard({ icon, title, value, trend, trendValue, className }) {
         <div className="p-3 rounded-full bg-blue-100 dark:bg-blue-900">
           {icon}
         </div>
-        <div className={`flex items-center ${trendColor}`}>
+        {/* <div className={`flex items-center ${trendColor}`}>
           {trendIcon}
           <span className="ml-1 text-sm font-medium">{trendValue}%</span>
-        </div>
+        </div> */}
       </div>
       <div className="mt-4">
         <p className="text-2xl font-semibold text-gray-800 dark:text-white">

@@ -1,5 +1,6 @@
 import React from "react";
 import { CheckCircleIcon, UserIcon } from "lucide-react";
+import Link from "next/link";
 
 // The updated TopUsers component
 export function TopUsers({ topUsers }) {
@@ -50,9 +51,11 @@ export function TopUsers({ topUsers }) {
           <p className="text-2xl font-bold text-blue-500">{topUsers.length}</p>
           <p className="text-sm text-gray-600">Free</p>
         </div>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">
-          View All Users
-        </button>
+        <Link href="/manage-users">
+          <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300">
+            View All Users
+          </button>
+        </Link>
       </div>
     </div>
   );
