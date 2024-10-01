@@ -24,7 +24,11 @@ export function Sidebar() {
       label: "Manage Landing Page",
       path: "/manage-landing-page",
     },
-    { icon: NewspaperIcon, label: "Blogs", path: "/blogs" },
+    {
+      icon: NewspaperIcon,
+      label: "Blogs",
+      path: "https://agentcoachblogteamlumio.wordpress.com/",
+    },
     { icon: MailIcon, label: "Newsletters", path: "/newsletters" },
     { icon: BarChartIcon, label: "Analytics", path: "/analytics" },
     { icon: CircleHelp, label: "FAQs", path: "/faq" },
@@ -34,7 +38,7 @@ export function Sidebar() {
     <aside className="hidden sm:flex sm:flex-col w-64 bg-gradient-to-b from-blue-600 to-blue-800 text-white">
       <Image
         src="/asxosan.png"
-        className="pl-3 mt-2 h-16 w-52"
+        className="pl-2 mt-2 h-16 w-52"
         height={56}
         width={192}
         alt="Logo"
@@ -43,15 +47,28 @@ export function Sidebar() {
         <ul className="flex flex-col py-2">
           {menuItems.map((item, index) => (
             <li key={index}>
-              <Link
-                href={item.path}
-                className={`flex items-center px-6 py-3 text-white hover:bg-blue-700 transition-colors duration-200 ${
-                  location.pathname === item.path ? "bg-blue-700" : ""
-                }`}
-              >
-                <item.icon className="h-5 w-5 mr-3" />
-                {item.label}
-              </Link>
+              {item.label === "Blogs" ? (
+                <a
+                  href={item.path}
+                  target="_blank"
+                  className={`flex items-center px-6 py-3 text-white hover:bg-blue-700 transition-colors duration-200 ${
+                    location === item.path ? "bg-blue-700" : ""
+                  }`}
+                >
+                  <item.icon className="h-5 w-5 mr-3" />
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  href={item.path}
+                  className={`flex items-center px-6 py-3 text-white hover:bg-blue-700 transition-colors duration-200 ${
+                    location.pathname === item.path ? "bg-blue-700" : ""
+                  }`}
+                >
+                  <item.icon className="h-5 w-5 mr-3" />
+                  {item.label}
+                </Link>
+              )}
             </li>
           ))}
         </ul>
