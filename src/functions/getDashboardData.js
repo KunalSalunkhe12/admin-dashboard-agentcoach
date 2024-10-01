@@ -16,6 +16,9 @@ export const getDashboardData = async (setData, setLoading, setError) => {
       return;
     }
     console.log(data);
+    const totlaMessages = data.aiUsage.General + data.aiUsage.Marketing + data.aiUsage.Motivation + data.aiUsage.Negotiation + data.aiUsage["Real Estate"] + data.aiUsage.Sales;
+    data.totalMessages = totlaMessages;
+    console.log(totlaMessages)
     setData(data);
     setLoading(false);
   } catch (error) {
