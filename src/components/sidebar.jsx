@@ -29,8 +29,12 @@ export function Sidebar() {
       label: "Blogs",
       path: "https://agentcoachblogteamlumio.wordpress.com/",
     },
-    { icon: MailIcon, label: "Newsletters", path: "/newsletters" },
-    { icon: BarChartIcon, label: "Analytics", path: "/analytics" },
+    { icon: MailIcon, label: "Auto-Posts", path: "/newsletters" },
+    {
+      icon: BarChartIcon,
+      label: "Analytics",
+      path: "https://analytics.google.com/analytics/web/provision/#/p461706909/realtime/overview",
+    },
     { icon: CircleHelp, label: "FAQs", path: "/faq" },
   ];
 
