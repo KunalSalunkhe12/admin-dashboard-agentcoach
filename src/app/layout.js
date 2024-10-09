@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NextTopLoader height={5 } />
+        <NextTopLoader height={5} />
         <div className="flex h-screen bg-gray-100">
           <Sidebar />
           <div className="flex-1 flex flex-col overflow-hidden">
