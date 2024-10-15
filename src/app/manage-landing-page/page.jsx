@@ -6,8 +6,17 @@ import { PlusIcon, XIcon } from "lucide-react";
 import { getManageLandingPagedata } from "@/functions/getManageLandingPageData";
 import { updateLandingPage } from "@/functions/updateLandingPage";
 import Loading from "@/components/Loading";
+import { AnimatePresence,motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import { checkIsAdminLogin } from "@/functions/checkIsAdminLogin";
 
 export default function page() {
+  const router = useRouter();
+  const isLogedIn = checkIsAdminLogin();
+  if (!isLogedIn) {
+    router.push("/login");
+  }
+
   const [title, setTitle] = useState(
     "Accelerate Your Real Estate Career With Cutting-Edge Generative"
   );
@@ -16,6 +25,19 @@ export default function page() {
   const [newRotatingText, setNewRotatingText] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTextIndex(
+        (prevIndex) => (prevIndex + 1) % rotatingTexts.length,
+      );
+    }, 3000); // Change text every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [rotatingTexts]);
+
+
   const handleAddRotatingText = () => {
     if (newRotatingText.trim() !== "") {
       setRotatingTexts([...rotatingTexts, newRotatingText.trim()]);
@@ -131,8 +153,22 @@ export default function page() {
         <div className="bg-blue-900 p-6 rounded-lg text-white">
           <h1 className="text-4xl font-bold mb-2">{title}</h1>
           <h2 className="text-3xl font-semibold mb-4">
-            <span className="text-blue-300">{rotatingTexts[0]}</span> {subtitle}
-            <p className="text-sm text-gray-300">
+          <AnimatePresence
+              mode="wait"
+              initial={false}
+            >
+              <motion.span
+                key={currentTextIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+                className="text-yellow-300 ml-2 inline-block min-w-[120px]"
+              >
+                {rotatingTexts[currentTextIndex]}
+              </motion.span>
+            </AnimatePresence> {subtitle}
+            <p className="mt-5 text-sm text-gray-300">
               (Rotating texts: {rotatingTexts.join(", ")})
             </p>
           </h2>

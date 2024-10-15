@@ -29,8 +29,15 @@ import { changeAutoEmailSentTime } from "@/functions/changeAutoEmailSentTime";
 import { Button } from "@/components/ui/button";
 import { setEmailSentDays } from "@/functions/setEmailSendDays";
 import { getSentEmailDays } from "@/functions/getSentEmailDays";
+import { checkIsAdminLogin } from "@/functions/checkIsAdminLogin";
+import { useRouter } from "next/navigation";
 
 export default function Newsletters() {
+  const router = useRouter();
+  const isLogedIn = checkIsAdminLogin();
+  if (!isLogedIn) {
+    router.push("/login");
+  }
   const [selectedTime, setSelectedTime] = useState("1:00 PM");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -205,9 +212,9 @@ export default function Newsletters() {
       <motion.div className="space-y-4" variants={itemVariants}>
         <Card className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
           <CardHeader>
-            <CardTitle className="text-2xl">Newsletter Time Settings</CardTitle>
+            <CardTitle className="text-2xl">Auto-Post Time Settings</CardTitle>
             <CardDescription className="text-gray-200">
-              Configure your daily newsletter schedule
+              Configure your daily Auto-Post schedule
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -247,7 +254,7 @@ export default function Newsletters() {
             </div> */}
             <div>
               <label className="text-sm font-medium mb-2 block">
-                Select New Time for Daily Newsletters (Central Time)
+                Select New Time for Daily Auto-Posts (Central Time)
               </label>
               <Select onValueChange={handleOnChangeTime} value={selectedTime}>
                 <SelectTrigger className="w-[180px] bg-white text-gray-900">
@@ -263,7 +270,7 @@ export default function Newsletters() {
               </Select>
             </div>
             <div className="space-y-2">
-              <p className="text-sm font-medium">Select Days for Newsletter</p>
+              <p className="text-sm font-medium">Select Days for Auto-post</p>
               <div className="flex flex-wrap gap-4">
                 {days.map((day, index) => (
                   <motion.div
@@ -324,7 +331,7 @@ export default function Newsletters() {
         </Card>
 
         <motion.div className="mt-8" variants={itemVariants}>
-          <h2 className="text-2xl font-semibold mb-4">Upcoming Newsletters</h2>
+          <h2 className="text-2xl font-semibold mb-4">Upcoming Auto-Posts</h2>
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
             variants={containerVariants}

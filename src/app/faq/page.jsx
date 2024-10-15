@@ -15,8 +15,17 @@ import { Textarea } from "@/components/ui/textarea";
 import { getFaqs } from "@/functions/getFaqs";
 import { updateFAQ } from "@/functions/updateFeq";
 import Loading from "@/components/Loading";
+import { useRouter } from "next/navigation";
+import { checkIsAdminLogin } from "@/functions/checkIsAdminLogin";
 
 export default function FAQ() {
+
+  const router = useRouter();
+  const isLogedIn = checkIsAdminLogin();
+  if (!isLogedIn) {
+    router.push("/login");
+  }
+
   const [faqs, setFaqs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");

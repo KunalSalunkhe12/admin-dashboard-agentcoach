@@ -6,12 +6,20 @@ import { ChatbotAnalysis } from "@/components/chatbot-analysis";
 import { TopUsers } from "@/components/top-users";
 import { getDashboardData } from "@/functions/getDashboardData";
 import Loading from "@/components/Loading";
+import { checkIsAdminLogin } from "@/functions/checkIsAdminLogin";
+import { useRouter } from "next/navigation";
 
 export default function page() {
+  const router = useRouter();
+  const isLogedIn = checkIsAdminLogin();
+  if (!isLogedIn) {
+    router.push("/login");
+  }
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [dashboardData, setDashboardData] = useState({});
   useEffect(() => {
+    checkIsAdminLogin();
     getDashboardData(setDashboardData, setLoading, setError);
   }, []);
 

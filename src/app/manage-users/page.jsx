@@ -19,9 +19,17 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { manageUsers } from "@/functions/manageUsers";
+import Loading from "@/components/Loading";
+import { useRouter } from "next/navigation";
+import { checkIsAdminLogin } from "@/functions/checkIsAdminLogin";
 
 export default function ManageUsers() {
-    const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const isLogedIn = checkIsAdminLogin();
+  if (!isLogedIn) {
+    router.push("/login");
+  }
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [metaData, setMetaData] = useState({});
     const [users, setUsers] = useState(
@@ -140,6 +148,11 @@ export default function ManageUsers() {
       );
     }, [currentPage]);
 
+
+    if(loading){
+      return <Loading/>
+    }
+
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-gray-900">User Management</h1>
@@ -165,11 +178,11 @@ export default function ManageUsers() {
         </TableHeader>
         <TableBody>
           {currentUsers.map((user) => (
-            <TableRow key={user.id}>
-              <TableCell>{user.name}</TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell>{user.phone}</TableCell>
-              <TableCell>{user.joinedDate}</TableCell>
+            <TableRow key={user?.user_id}>
+              <TableCell>{user?.name}</TableCell>
+              <TableCell>{user?.email}</TableCell>
+              <TableCell>{user?.phone}</TableCell>
+              <TableCell>{user?.joinedDate}</TableCell>
               <TableCell>
                 <Badge
                   variant="secondary"
@@ -185,7 +198,7 @@ export default function ManageUsers() {
                       <Button
                         variant="ghost"
                         size="icon"
-                        onClick={() => handleDelete(user.id)}
+                        onClick={() => handleDelete(user.user_id)}
                       >
                         <Trash2Icon className="h-4 w-4" />
                       </Button>

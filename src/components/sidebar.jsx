@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 // import { Link, useLocation } from "react-router-dom";
 import {
@@ -12,9 +14,12 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { logOutAdmin } from "@/functions/logOutAdmin";
+import {redirect, useRouter} from "next/navigation";
 
 export function Sidebar() {
-  //   const location = useLocation();
+
+  const router = useRouter();
   const location = "/";
   const menuItems = [
     { icon: HomeIcon, label: "Home", path: "/" },
@@ -78,7 +83,10 @@ export function Sidebar() {
         </ul>
       </nav>
       <div className="p-4">
-        <button className="flex items-center text-white opacity-75 hover:opacity-100 transition-opacity duration-200">
+        <button onClick={()=>{
+          logOutAdmin();
+          router.push('/login');
+        }} className="flex items-center text-white opacity-75 hover:opacity-100 transition-opacity duration-200">
           <LogOutIcon className="h-5 w-5 mr-3" />
           Logout
         </button>

@@ -9,7 +9,7 @@ const COLORS = [
   "#EF4444", // Red
   "#8B5CF6", // Purple
   "#EC4899", // Pink
-];
+]
 
 // Main component to render AI chatbot analysis
 export function ChatbotAnalysis({ aiUsage, aiUsagePercentages }) {
