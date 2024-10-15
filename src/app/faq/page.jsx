@@ -21,10 +21,12 @@ import { checkIsAdminLogin } from "@/functions/checkIsAdminLogin";
 export default function FAQ() {
 
   const router = useRouter();
+useEffect(()=>{
   const isLogedIn = checkIsAdminLogin();
   if (!isLogedIn) {
     router.push("/login");
   }
+},[])
 
   const [faqs, setFaqs] = useState([]);
   const [loading, setLoading] = useState(true);

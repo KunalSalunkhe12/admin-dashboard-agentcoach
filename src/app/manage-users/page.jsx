@@ -25,10 +25,12 @@ import { checkIsAdminLogin } from "@/functions/checkIsAdminLogin";
 
 export default function ManageUsers() {
   const router = useRouter();
+useEffect(()=>{
   const isLogedIn = checkIsAdminLogin();
   if (!isLogedIn) {
     router.push("/login");
   }
+},[])
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [metaData, setMetaData] = useState({});

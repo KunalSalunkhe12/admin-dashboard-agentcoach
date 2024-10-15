@@ -12,10 +12,12 @@ import { checkIsAdminLogin } from "@/functions/checkIsAdminLogin";
 
 export default function page() {
   const router = useRouter();
+useEffect(()=>{
   const isLogedIn = checkIsAdminLogin();
   if (!isLogedIn) {
     router.push("/login");
   }
+},[])
 
   const [title, setTitle] = useState(
     "Accelerate Your Real Estate Career With Cutting-Edge Generative"

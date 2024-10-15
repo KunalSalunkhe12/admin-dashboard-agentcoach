@@ -34,10 +34,12 @@ import { useRouter } from "next/navigation";
 
 export default function Newsletters() {
   const router = useRouter();
+useEffect(()=>{
   const isLogedIn = checkIsAdminLogin();
   if (!isLogedIn) {
     router.push("/login");
   }
+},[])
   const [selectedTime, setSelectedTime] = useState("1:00 PM");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
