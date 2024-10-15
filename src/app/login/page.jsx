@@ -38,7 +38,6 @@ export default function AdminLogin() {
    await adminLogin(email,password,setIsLoading,setError,router);
     setIsLoading(false);
   };
-
   const handleAdminRequest = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
