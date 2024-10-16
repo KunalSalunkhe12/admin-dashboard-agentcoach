@@ -32,7 +32,7 @@ export function Sidebar() {
     {
       icon: NewspaperIcon,
       label: "Blogs",
-      path: "https://agentcoachblogteamlumio.wordpress.com/",
+      path: "https://agentcoach-ai-blog.ghost.io/ghost/#/signin",
     },
     { icon: MailIcon, label: "Auto-Posts", path: "/newsletters" },
     {

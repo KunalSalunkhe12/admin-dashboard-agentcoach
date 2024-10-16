@@ -16,12 +16,12 @@ useEffect(()=>{
   if (!isLogedIn) {
     router.push("/login");
   }
-},[])
+},[]);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [dashboardData, setDashboardData] = useState({});
   useEffect(() => {
-    checkIsAdminLogin();
     getDashboardData(setDashboardData, setLoading, setError);
   }, []);
 
@@ -46,7 +46,14 @@ useEffect(()=>{
           trendValue="5"
           className="border-l-4 border-blue-500"
         />
-
+         <StatCard
+          icon={<ClockIcon className="h-6 w-6 text-purple-600" />}
+          title="Total Paid Users"
+          value="10"
+          trend="up"
+          trendValue="8"
+          className="border-l-4 border-purple-500"
+        />
         <StatCard
           icon={<MessageSquareIcon className="h-6 w-6 text-green-600" />}
           title="Total Messages"
@@ -56,14 +63,7 @@ useEffect(()=>{
           className="border-l-4 border-green-500"
         />
 
-        <StatCard
-          icon={<ClockIcon className="h-6 w-6 text-purple-600" />}
-          title="Hours of Engagement"
-          value="1000"
-          trend="up"
-          trendValue="8"
-          className="border-l-4 border-purple-500"
-        />
+       
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <ChatbotAnalysis

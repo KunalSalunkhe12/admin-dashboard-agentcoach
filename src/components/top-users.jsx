@@ -20,13 +20,13 @@ export function TopUsers({ topUsers }) {
           >
             <div className="flex items-center">
               <img
-                src={`https://i.pravatar.cc/150?u=${user.user_id}`}
+                src={`${user.imageUrl}`}
                 alt={user.name || "User Avatar"}
                 className="w-10 h-10 rounded-full mr-3"
               />
               <div>
                 <span className="text-sm font-medium text-gray-700">
-                  {user.name || "Anonymous User"} {/* Fallback for null name */}
+                  {user.emailAddresses[0].emailAddress || "Anonymous User"} 
                 </span>
                 <div className="flex items-center mt-1">
                   <CheckCircleIcon className="h-4 w-4 text-blue-500 mr-1" />

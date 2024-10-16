@@ -31,6 +31,7 @@ import { setEmailSentDays } from "@/functions/setEmailSendDays";
 import { getSentEmailDays } from "@/functions/getSentEmailDays";
 import { checkIsAdminLogin } from "@/functions/checkIsAdminLogin";
 import { useRouter } from "next/navigation";
+import { convertToCST } from "@/functions/convertTimeCts";
 
 export default function Newsletters() {
   const router = useRouter();
@@ -112,23 +113,6 @@ useEffect(()=>{
     return `${month} ${day}`;
   }
 
-  const timeZones = [
-    { value: "America/New_York", label: "Eastern Time (ET)" },
-    { value: "America/Chicago", label: "Central Time (CT)" },
-    { value: "America/Denver", label: "Mountain Time (MT)" },
-    { value: "America/Los_Angeles", label: "Pacific Time (PT)" },
-    { value: "America/Anchorage", label: "Alaska Time (AKT)" },
-    { value: "Pacific/Honolulu", label: "Hawaii-Aleutian Time (HAT)" },
-    { value: "America/Phoenix", label: "Arizona Time (AZT)" },
-    { value: "America/Puerto_Rico", label: "Atlantic Time (AT)" },
-    { value: "Pacific/Guam", label: "Chamorro Time (ChST)" },
-    { value: "Pacific/Samoa", label: "Samoa Time (SST)" },
-    { value: "Europe/London", label: "British Summer Time (BST)" },
-    { value: "Europe/Paris", label: "Central European Time (CET)" },
-    { value: "Asia/Tokyo", label: "Japan Standard Time (JST)" },
-    { value: "Australia/Sydney", label: "Australian Eastern Time (AET)" },
-    { value: "Asia/Dubai", label: "Gulf Standard Time (GST)" },
-  ];
 
   const timeOptions = [];
   for (let hour = 0; hour < 24; hour++) {
@@ -138,20 +122,9 @@ useEffect(()=>{
     }
   }
 
-    useEffect(() => {
-      // Update auto email time when time zone changes
-      const newAutoEmailTime = format(
-        new Date().setHours(13, 15, 0, 0),
-        "h:mm a"
-      );
-      // setAutoEmailTime(newAutoEmailTime);
-    }, [selectedTimeZone]);
+  
 
-  const handleSetTimeZone = (e) => {
-    try {
-      setSelectedTimeZone(e);
-    } catch (error) {}
-  };
+
 
   const handleUpdate = () => {
     const selectedDays = days
@@ -175,8 +148,11 @@ useEffect(()=>{
   };
 
   const handleOnChangeTime = async (e) => {
+    setLoading(true);
+    data.emailSentTime=e;
     setSelectedTime(e);
-    changeAutoEmailSentTime(e, setLoading, setError);
+   await changeAutoEmailSentTime(e, setLoading, setError);
+   setLoading(false);
   };
 
   useEffect(() => {
@@ -223,14 +199,14 @@ useEffect(()=>{
             <div className="flex items-center space-x-4">
               <Clock className="h-6 w-6" />
               <div>
-                <p className="text-sm font-medium">Current Time (CT)</p>
+                <p className="text-sm font-medium">Current Time (CST)</p>
                 <p className="text-xl font-bold">{data.serverCurrentTime}</p>
               </div>
             </div>
             <div className="flex items-center space-x-4">
               <Send className="h-6 w-6" />
               <div>
-                <p className="text-sm font-medium">Auto Email Sent Time (CT)</p>
+                <p className="text-sm font-medium">Auto Email Sent Time (CST)</p>
                 <p className="text-xl font-bold">{data.emailSentTime}</p>
               </div>
             </div>

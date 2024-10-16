@@ -21,8 +21,7 @@ export const manageUsers = async (
       setError("users data is not available");
       return;
     }
-    console.log(data?.users);
-
+console.log(data)
     setUsersData(data?.users || []);
     setMetaData(data?.meta || {});
     setLoading(false);
