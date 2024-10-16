@@ -50,7 +50,7 @@ useEffect(()=>{
   const [data, setData] = useState({
     DailyEmailTemplet: [],
     serverCurrentTime: "4:53 PM",
-    emailSentTime: "",
+    emailSentTime: "4:53 PM",
     serverTimeZone: "America/Chicago",
   });
   const [days, setDays] = useState([
@@ -62,6 +62,11 @@ useEffect(()=>{
     { name: "Friday", isSelected: false },
     { name: "Saturday", isSelected: false },
   ]);
+
+
+  useEffect(() => {
+    setSelectedTime(convertToCSTSimple(data.emailSentTime,5,0));
+  },[data]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
