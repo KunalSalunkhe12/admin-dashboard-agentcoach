@@ -156,7 +156,7 @@ useEffect(()=>{
   const handleOnChangeTime = async (e) => {
     // alert(addTime(e,5,0));
     setLoading(true);
-    data.emailSentTime=e;
+    data.emailSentTime=addTime(e,5,0);
     setSelectedTime(e);
    await changeAutoEmailSentTime(addTime(e,5,0), setLoading, setError);
    setLoading(false);
