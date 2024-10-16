@@ -31,7 +31,8 @@ import { setEmailSentDays } from "@/functions/setEmailSendDays";
 import { getSentEmailDays } from "@/functions/getSentEmailDays";
 import { checkIsAdminLogin } from "@/functions/checkIsAdminLogin";
 import { useRouter } from "next/navigation";
-import { convertToCST } from "@/functions/convertTimeCts";
+import { convertToCSTSimple } from "@/functions/convertTimeCts";
+import { addTime } from "@/functions/convertCstToserverTime";
 
 export default function Newsletters() {
   const router = useRouter();
@@ -148,10 +149,11 @@ useEffect(()=>{
   };
 
   const handleOnChangeTime = async (e) => {
+    // alert(addTime(e,5,0));
     setLoading(true);
     data.emailSentTime=e;
     setSelectedTime(e);
-   await changeAutoEmailSentTime(e, setLoading, setError);
+   await changeAutoEmailSentTime(addTime(e,5,0), setLoading, setError);
    setLoading(false);
   };
 
@@ -200,14 +202,16 @@ useEffect(()=>{
               <Clock className="h-6 w-6" />
               <div>
                 <p className="text-sm font-medium">Current Time (CST)</p>
-                <p className="text-xl font-bold">{data.serverCurrentTime}</p>
+                <p className="text-xl font-bold">{convertToCSTSimple(data.serverCurrentTime,5,0)}</p>
+                {/* <p className="text-xl font-bold">{data.serverCurrentTime}</p> */}
               </div>
             </div>
             <div className="flex items-center space-x-4">
               <Send className="h-6 w-6" />
               <div>
                 <p className="text-sm font-medium">Auto Email Sent Time (CST)</p>
-                <p className="text-xl font-bold">{data.emailSentTime}</p>
+                <p className="text-xl font-bold">{convertToCSTSimple(data.emailSentTime,5,0)}</p>
+                {/* <p className="text-xl font-bold">{data.emailSentTime}</p> */}
               </div>
             </div>
             {/* <div>

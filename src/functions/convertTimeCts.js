@@ -1,27 +1,34 @@
-export function convertToCST(timeString) {
-    // Parse the input time string
+
+   export const convertToCSTSimple = (timeString, hoursToSubtract, minutesToSubtract) => {
+    // Parse the time string
     const [time, period] = timeString.split(' ');
-    const [hours, minutes] = time.split(':');
-
-    // Create a Date object for today with the given time
-    const date = new Date();
-    date.setHours(period === 'PM' ? parseInt(hours) + 12 : parseInt(hours));
-    date.setMinutes(parseInt(minutes));
-    date.setSeconds(0);
-
-    // Convert to CST
-    const options = {
-        timeZone: 'America/Chicago',
-        hour12: true,
-        hour: 'numeric',
-        minute: '2-digit',
-    };
-
-    const cstTime = date.toLocaleString('en-US', options);
-    return cstTime;
-}
-
-// Example usage:
-const result = convertToCST("5:09 AM");
-console.log(result); // Should output something like "12:08 AM" (may vary based on daylight saving time)
-
+    let [hours, minutes] = time.split(':').map(Number);
+  
+    // Convert to 24-hour format if necessary
+    if (period.toLowerCase() === 'pm' && hours !== 12) {
+      hours += 12;
+    } else if (period.toLowerCase() === 'am' && hours === 12) {
+      hours = 0;
+    }
+  
+    // Create a Date object (using an arbitrary date)
+    const date = new Date(2023, 0, 1, hours, minutes);
+  
+    // Subtract the specified hours and minutes
+    date.setHours(date.getHours() - hoursToSubtract);
+    date.setMinutes(date.getMinutes() - minutesToSubtract);
+  
+    // Format the result back to 12-hour format
+    let resultHours = date.getHours();
+    const resultMinutes = date.getMinutes().toString().padStart(2, '0');
+    const resultPeriod = resultHours >= 12 ? 'PM' : 'AM';
+  
+    if (resultHours > 12) {
+      resultHours -= 12;
+    } else if (resultHours === 0) {
+      resultHours = 12;
+    }
+  
+    return `${resultHours}:${resultMinutes} ${resultPeriod}`;
+  }
+  
