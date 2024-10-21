@@ -88,9 +88,9 @@ export default function ManageUsers() {
           <TableRow>
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
-            <TableHead>Phone</TableHead>
+            <TableHead>Paid User</TableHead>
             <TableHead>Joined Date</TableHead>
-            <TableHead>Status</TableHead>
+            {/* <TableHead>Status</TableHead> */}
             <TableHead></TableHead>
           </TableRow>
         </TableHeader>
@@ -99,18 +99,18 @@ export default function ManageUsers() {
             <TableRow key={user?.id}>
               <TableCell>{user?.firstName}</TableCell>
               <TableCell>{user?.emailAddresses[0].emailAddress}</TableCell>
-              <TableCell>{user?.phone}</TableCell>
+              <TableCell>{user?.publicMetadata?.trialStatus ? "Free":"Paid"}</TableCell>
               <TableCell>
                 {new Date(user?.createdAt).toLocaleString()}
               </TableCell>
-              <TableCell>
+              {/* <TableCell>
                 <Badge
                   variant="secondary"
                   className="bg-green-100 text-green-800"
                 >
                   {user.status}
                 </Badge>
-              </TableCell>
+              </TableCell> */}
               <TableCell>
                 <TooltipProvider>
                   <Tooltip>

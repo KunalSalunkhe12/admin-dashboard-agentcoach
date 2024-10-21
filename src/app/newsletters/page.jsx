@@ -335,9 +335,9 @@ useEffect(()=>{
                 >
                   <CardHeader>
                     <CardTitle>{email.title}</CardTitle>
-                    <CardDescription>
+                    {/* <CardDescription>
                       Scheduled for at {generateFutureDate(index)}
-                    </CardDescription>
+                    </CardDescription> */}
                   </CardHeader>
                   <CardContent className="flex-grow flex flex-col">
                     <motion.img

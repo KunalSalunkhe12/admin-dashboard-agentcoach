@@ -1,8 +1,14 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { BellIcon } from "lucide-react";
 import Image from "next/image";
 
 export function Header() {
+  const [token,setToken]=useState("");
+  useEffect(()=>{
+    const tokenData=localStorage.getItem("adminToken");
+    setToken(tokenData);
+  },[token]);
   return (
     <header className="bg-white shadow-md">
       <div className="container mx-auto px-6 py-4">
@@ -12,7 +18,8 @@ export function Header() {
             {/* <button className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors duration-200">
               <BellIcon className="h-5 w-5" />
             </button> */}
-            <div className="flex items-center space-x-2">
+            {
+              token && <div className="flex items-center space-x-2">
               <Image
                 width={100}
                 height={100}
@@ -23,6 +30,7 @@ export function Header() {
 
               <span className="font-medium text-gray-800">Jeff Hammerberg</span>
             </div>
+            }
           </div>
         </div>
       </div>
